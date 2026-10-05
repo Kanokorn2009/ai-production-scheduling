@@ -64,7 +64,7 @@ def load_data():
     )
 
     schedule = pd.read_csv(
-        BASE / "final_production_schedule.csv"
+        BASE / "cleaned_production_schedule.csv"
     )
 
     return orders, schedule
@@ -81,7 +81,7 @@ summary = genai_mod.build_summary(schedule)
 
 def ask_ai(question, summary, schedule):
 
-    api_key = os.getenv("OPENROUTER_API_KEY")
+    api_key = st.secrets.get("OPENROUTER_API_KEY", os.getenv("OPENROUTER_API_KEY"))
 
     if not api_key:
         return (
